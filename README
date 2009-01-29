@@ -1,0 +1,32 @@
+I find myself writing, again and again, simple plugins for jQuery 
+like the following:
+
+  $.fn.showIf = function(condition) {
+    if (condition)
+      this.show();
+    else
+      this.hide();
+    return this;
+  };
+
+This factory simplifies this creation, by allowing you to write
+
+  $.conditionalFactory('showIf',
+    function() { this.show() },
+    function() { this.hide() }
+  );
+
+Another example could be to switch between classes, based on some
+boolean condition:
+  
+  $.conditionalFcatory('toggleClass',
+    function(cls) { this.addClass(cls) },
+    function(cls) { this.removeClass(cls) }
+  );
+
+As it is quite common for the callbacks just to make simple calls 
+to jQuery functions, the above functions can be created with
+
+  $.conditionalFactory('showIf', 'show', 'hide');
+  $.conditionalFactory('toggleClass', 'addClass', 'removeClass');
+
