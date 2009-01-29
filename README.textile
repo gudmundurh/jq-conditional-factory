@@ -1,6 +1,7 @@
 I find myself writing, again and again, simple plugins for jQuery 
 like the following:
 
+<pre>
   $.fn.showIf = function(condition) {
     if (condition)
       this.show();
@@ -8,25 +9,37 @@ like the following:
       this.hide();
     return this;
   };
+</pre>
 
-This factory simplifies this creation, by allowing you to write
+The factory simplifies this creation, by allowing you to write
 
+<pre>
   $.conditionalFactory('showIf',
     function() { this.show() },
     function() { this.hide() }
   );
+</pre>
 
 Another example could be to switch between classes, based on some
 boolean condition:
-  
+ 
+<pre>
   $.conditionalFcatory('toggleClass',
     function(cls) { this.addClass(cls) },
     function(cls) { this.removeClass(cls) }
   );
+</pre>
+
+and then use it as
+
+<pre>
+  $('p').toggleClass(active, 'active');
+</pre>
 
 As it is quite common for the callbacks just to make simple calls 
 to jQuery functions, the above functions can be created with
 
+<pre>
   $.conditionalFactory('showIf', 'show', 'hide');
   $.conditionalFactory('toggleClass', 'addClass', 'removeClass');
-
+</pre>
